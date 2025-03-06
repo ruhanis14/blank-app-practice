@@ -1,6 +1,6 @@
 import streamlit as st
 
-st.title("🚀 Mission Integration and Ops Data Solutioning")
+st.title(" Mission Integration and Ops Data Solutioning")
 
 st.write("Use the search directory below to find relevant data and resources.")
 
