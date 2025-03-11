@@ -1,10 +1,10 @@
 import streamlit as st
+from datetime import datetime
 
-# Custom CSS for professional NASA-style theme
+# --- Custom CSS for Background and Styling ---
 st.markdown(
     """
     <style>
-        /* Set background color and font */
         body {
             background-color: #f5f7fa;
             color: #1e1e1e;
@@ -18,7 +18,6 @@ st.markdown(
             background-position: center;
         }
 
-        /* Transparent container background for readability */
         .css-18e3th9 {
             background-color: rgba(255, 255, 255, 0.85);
             padding: 2rem;
@@ -26,7 +25,6 @@ st.markdown(
             box-shadow: 0 0 15px rgba(0,0,0,0.1);
         }
 
-        /* Input and text colors */
         .stTextInput > div > div > input {
             background-color: #ffffff;
             color: #000000;
@@ -36,19 +34,36 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# App content
-st.title("🚀 Mission Integration and Ops Data Solutioning")
-
+# --- Title and Instructions ---
+st.title("Mission Integration and Ops Data Solutioning")
 st.write("Use the search directory below to find relevant data and resources.")
 
-# Create a search input
-search_query = st.text_input("Search Directory:", "")
+# --- Basic Search Input ---
+search_query = st.text_input("🔍 Search Directory", "")
 
-# Placeholder for search results (Replace with actual search logic)
+# --- Advanced Faceted Filters ---
+with st.expander("📂 Advanced Filters"):
+    col1, col2, col3, col4 = st.columns(4)
+
+    with col1:
+        selected_category = st.selectbox("Category", options=["All", "Engineering", "Flight Ops", "Simulations", "Monitoring"])
+
+    with col2:
+        file_type = st.multiselect("File Type", options=["PDF", "Image", "Document", "Report"])
+
+    with col3:
+        start_date = st.date_input("Start Date", datetime(2023, 1, 1))
+        end_date = st.date_input("End Date", datetime(2025, 1, 1))
+
+    with col4:
+        tags_input = st.text_input("Keywords / Tags (comma-separated)")
+
+# --- Placeholder for Search Results ---
+st.markdown("### 📄 Search Results")
 if search_query:
     st.write(f"Showing results for: **{search_query}**")
-    # Implement search logic here (e.g., filtering a dataset, searching a database, etc.)
     st.write("🔍 No results found. (Implement search logic here)")
 else:
-    st.write("Enter a keyword to search the directory.")
+    st.info("Enter a keyword to search the directory or use filters above.")
+
 
