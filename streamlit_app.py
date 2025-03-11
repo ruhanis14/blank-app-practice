@@ -1,7 +1,7 @@
 import streamlit as st
 from datetime import datetime
 
-# --- Custom CSS for Background and Styling ---
+# CSS
 st.markdown(
     """
     <style>
@@ -34,14 +34,14 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# --- Title and Instructions ---
+# Title and Constructions
 st.title("Mission Integration and Ops Data Solutioning")
 st.write("Use the search directory below to find relevant data and resources.")
 
-# --- Basic Search Input ---
+# Search Input
 search_query = st.text_input("🔍 Search Directory", "")
 
-# --- Advanced Faceted Filters ---
+# Advanced Filtering
 with st.expander("📂 Advanced Filters"):
     col1, col2, col3, col4 = st.columns(4)
 
@@ -58,7 +58,7 @@ with st.expander("📂 Advanced Filters"):
     with col4:
         tags_input = st.text_input("Keywords / Tags (comma-separated)")
 
-# --- Placeholder for Search Results ---
+# Placeholder for search results
 st.markdown("### 📄 Search Results")
 if search_query:
     st.write(f"Showing results for: **{search_query}**")
