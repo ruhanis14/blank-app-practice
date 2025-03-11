@@ -73,7 +73,7 @@ if search_query and search_query not in st.session_state.search_history:
         st.session_state.search_history.pop()
 
 # Search Results
-st.markdown("### 📄 Search Results")
+st.markdown("### Search Results")
 if search_query:
     st.write(f"Showing results for: **{search_query}**")
     st.write("🔍 No results found. (Implement search logic here)")
@@ -91,7 +91,7 @@ else:
 
 # --- Display Recent Searches ---
 if st.session_state.search_history:
-    st.markdown("### 🕓 Recent Searches")
+    st.markdown("###  Recent Searches")
     for past_search in st.session_state.search_history:
         if st.button(f"🔁 {past_search}"):
             st.session_state.search_query = past_search
