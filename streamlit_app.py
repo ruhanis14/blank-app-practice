@@ -93,7 +93,7 @@ else:
 if st.session_state.search_history:
     st.markdown("###  Recent Searches")
     for past_search in st.session_state.search_history:
-        if st.button(f"🔁 {past_search}"):
+        if st.button(f" {past_search}"):
             st.session_state.search_query = past_search
 
 # Bookmark Section
