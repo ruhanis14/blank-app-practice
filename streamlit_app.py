@@ -1,5 +1,6 @@
 import streamlit as st
 from datetime import datetime
+import pandas as pd
 
 # CSS
 st.markdown(
@@ -34,7 +35,14 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Title and Constructions
+# Initialize
+if 'search_history' not in st.session_state:
+    st.session_state.search_history = []
+
+if 'bookmarks' not in st.session_state:
+    st.session_state.bookmarks = []
+
+# Title
 st.title("Mission Integration and Ops Data Solutioning")
 st.write("Use the search directory below to find relevant data and resources.")
 
@@ -58,13 +66,53 @@ with st.expander("📂 Advanced Filters"):
     with col4:
         tags_input = st.text_input("Keywords / Tags (comma-separated)")
 
-# Placeholder for search results
+# Save Search History
+if search_query and search_query not in st.session_state.search_history:
+    st.session_state.search_history.insert(0, search_query)  # most recent first
+    if len(st.session_state.search_history) > 5:  # keep last 5
+        st.session_state.search_history.pop()
+
+# Search Results
 st.markdown("### 📄 Search Results")
 if search_query:
     st.write(f"Showing results for: **{search_query}**")
     st.write("🔍 No results found. (Implement search logic here)")
+
+    # --- Simulate a bookmarkable result ---
+    if st.button("⭐ Bookmark This Search"):
+        if search_query not in st.session_state.bookmarks:
+            st.session_state.bookmarks.append(search_query)
+            st.success("Search bookmarked!")
+        else:
+            st.info("This search is already bookmarked.")
+
 else:
     st.info("Enter a keyword to search the directory or use filters above.")
+
+# --- Display Recent Searches ---
+if st.session_state.search_history:
+    st.markdown("### 🕓 Recent Searches")
+    for past_search in st.session_state.search_history:
+        if st.button(f"🔁 {past_search}"):
+            st.session_state.search_query = past_search
+
+# Bookmark Section
+if st.session_state.bookmarks:
+    st.markdown("### 📌 Bookmarked Searches")
+    for b in st.session_state.bookmarks:
+        st.write(f"🔖 {b}")
+
+    # --- Export Bookmarks to CSV ---
+    export_df = pd.DataFrame(st.session_state.bookmarks, columns=["Search Query"])
+    csv_data = export_df.to_csv(index=False).encode("utf-8")
+
+    st.download_button(
+        label="📤 Export Bookmarks to CSV",
+        data=csv_data,
+        file_name="bookmarked_searches.csv",
+        mime="text/csv"
+    )
+
 
 
 
