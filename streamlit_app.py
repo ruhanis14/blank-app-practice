@@ -46,7 +46,7 @@ with st.expander("📂 Advanced Filters"):
     col1, col2, col3, col4 = st.columns(4)
 
     with col1:
-        selected_category = st.selectbox("Category", options=["All", "Engineering", "Flight Ops", "Simulations", "Monitoring"])
+        selected_category = st.selectbox("Category", options=["All", "Test 1", "Test 2", "Test 3"])
 
     with col2:
         file_type = st.multiselect("File Type", options=["PDF", "Image", "Document", "Report"])
@@ -65,5 +65,6 @@ if search_query:
     st.write("🔍 No results found. (Implement search logic here)")
 else:
     st.info("Enter a keyword to search the directory or use filters above.")
+
 
 
