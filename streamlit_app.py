@@ -50,7 +50,7 @@ st.write("Use the search directory below to find relevant data and resources.")
 search_query = st.text_input("🔍 Search Directory", "")
 
 # Advanced Filtering
-with st.expander("📂 Advanced Filters"):
+with st.expander("Advanced Filters"):
     col1, col2, col3, col4 = st.columns(4)
 
     with col1:
